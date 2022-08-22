@@ -21,14 +21,14 @@ const SingIn = () => {
         placeholder="Email"
         marginBottom={4}
         InputLeftElement={<Icon as={<Envelope color={colors.gray[300]} />} />}
-        onChangeText={setName}
+        onChangeText={() => setName}
       />
       <Input
         mb={8}
         placeholder="Senha"
         InputLeftElement={<Icon as={<Key color={colors.gray[300]} />} />}
         secureTextEntry
-        onChangeText={setPassword}
+        onChangeText={() => setPassword}
       />
       <Button title="Entrar" w="full" onPress={handleSingIn} />
     </VStack>

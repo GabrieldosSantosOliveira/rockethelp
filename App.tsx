@@ -1,5 +1,5 @@
 import { NativeBaseProvider, StatusBar } from "native-base";
-import { SingIn } from "./src/screens/SingIn";
+import { Routes } from "./src/routes";
 import { THEME } from "./src/styles/theme";
 import {
   useFonts,
@@ -16,7 +16,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded ? <SingIn /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </NativeBaseProvider>
   );
 }
