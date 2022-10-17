@@ -1,4 +1,4 @@
-import { Center, Spinner } from "native-base";
+import { Center, Spinner } from 'native-base';
 const Loading = () => {
   return (
     <Center flex={1} bg="gray.700">
