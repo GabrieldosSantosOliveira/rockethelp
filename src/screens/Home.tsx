@@ -1,3 +1,6 @@
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import { useNavigation } from '@react-navigation/native';
 import {
   Heading,
   HStack,
@@ -6,56 +9,62 @@ import {
   useTheme,
   VStack,
   FlatList,
-  Center,
-} from "native-base";
-import { dateFormat } from "../utils/firestoreDateFormat";
-import auth from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
-import { Alert } from "react-native";
-import { useState, useEffect } from "react";
-import Logo from "../assets/logo_secondary.svg";
-import { SignOut, ChatTeardropText } from "phosphor-react-native";
-import { Filter } from "../components/Filter";
-import { Button } from "../components/Button";
-import { Order, OrderProps } from "../components/Order";
-import { useNavigation } from "@react-navigation/native";
-import { Loading } from "../components/Loading";
+  Center
+} from 'native-base';
+import {
+  SignOut,
+  ChatTeardropText
+} from 'phosphor-react-native';
+import { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
+
+import Logo from '../assets/logo_secondary.svg';
+import { Button } from '../components/Button';
+import { Filter } from '../components/Filter';
+import { Loading } from '../components/Loading';
+import { Order, OrderProps } from '../components/Order';
+import { dateFormat } from '../utils/firestoreDateFormat';
 const Home = () => {
   const { colors } = useTheme();
   const [isLoading, setIsLoading] = useState(true);
-  const [statusSelected, setStatusSelected] = useState<"open" | "closed">(
-    "open"
-  );
+  const [statusSelected, setStatusSelected] = useState<
+    'open' | 'closed'
+  >('open');
   const [orders, setOrders] = useState<OrderProps[]>([]);
   const navigation = useNavigation();
 
   const handleNewOrder = () => {
-    navigation.navigate("new");
+    navigation.navigate('new');
   };
   const handleOpenDetails = (orderId: string) => {
-    navigation.navigate("details", { orderId });
+    navigation.navigate('details', { orderId });
   };
   const handleLogout = () => {
     auth()
       .signOut()
-      .catch((error) => {
-        Alert.alert("Sair", "Não foi possível sair");
+      .catch(() => {
+        Alert.alert('Sair', 'Não foi possível sair');
       });
   };
   useEffect(() => {
     setIsLoading(true);
     const subscriber = firestore()
-      .collection("orders")
-      .where("status", "==", statusSelected)
-      .onSnapshot((snapshot) => {
-        const data = snapshot.docs.map((doc) => {
-          const { patrimony, description, status, created_at } = doc.data();
+      .collection('orders')
+      .where('status', '==', statusSelected)
+      .onSnapshot(snapshot => {
+        const data = snapshot.docs.map(doc => {
+          const {
+            patrimony,
+            description,
+            status,
+            created_at
+          } = doc.data();
           return {
             id: doc.id,
             patrimony,
             description,
             status,
-            when: dateFormat(created_at),
+            when: dateFormat(created_at)
           };
         });
         setOrders(data);
@@ -77,7 +86,9 @@ const Home = () => {
       >
         <Logo />
         <IconButton
-          icon={<SignOut size={26} color={colors.gray[300]} />}
+          icon={
+            <SignOut size={26} color={colors.gray[300]} />
+          }
           onPress={handleLogout}
         />
       </HStack>
@@ -96,14 +107,14 @@ const Home = () => {
           <Filter
             title="em andamento"
             type="open"
-            onPress={() => setStatusSelected("open")}
-            isActive={statusSelected === "open"}
+            onPress={() => setStatusSelected('open')}
+            isActive={statusSelected === 'open'}
           />
           <Filter
             title="em andamento"
             type="closed"
-            onPress={() => setStatusSelected("closed")}
-            isActive={statusSelected === "closed"}
+            onPress={() => setStatusSelected('closed')}
+            isActive={statusSelected === 'closed'}
           />
         </HStack>
         {isLoading ? (
@@ -111,24 +122,41 @@ const Home = () => {
         ) : (
           <FlatList
             data={orders}
-            keyExtractor={(item) => item.id}
+            keyExtractor={item => item.id}
             renderItem={({ item }) => (
-              <Order data={item} onPress={() => handleOpenDetails(item.id)} />
+              <Order
+                data={item}
+                onPress={() => handleOpenDetails(item.id)}
+              />
             )}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: 10 }}
             ListEmptyComponent={() => (
               <Center>
-                <ChatTeardropText color={colors.gray[300]} size={40} />
-                <Text color="gray.300" fontSize="xl" mt={6} textAlign="center">
-                  Você ainda não possui solicitações{" "}
-                  {statusSelected === "open" ? "em andamento" : "finalizadas"}.
+                <ChatTeardropText
+                  color={colors.gray[300]}
+                  size={40}
+                />
+                <Text
+                  color="gray.300"
+                  fontSize="xl"
+                  mt={6}
+                  textAlign="center"
+                >
+                  Você ainda não possui solicitações{' '}
+                  {statusSelected === 'open'
+                    ? 'em andamento'
+                    : 'finalizadas'}
+                  .
                 </Text>
               </Center>
             )}
           />
         )}
-        <Button title="Nova Solicitação" onPress={handleNewOrder} />
+        <Button
+          title="Nova Solicitação"
+          onPress={handleNewOrder}
+        />
       </VStack>
     </VStack>
   );
