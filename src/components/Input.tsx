@@ -1,7 +1,4 @@
-import {
-  Input as NativeBaseInput,
-  IInputProps
-} from 'native-base';
+import { Input as NativeBaseInput, IInputProps } from 'native-base';
 
 const Input = ({ ...rest }: IInputProps) => {
   return (
@@ -17,7 +14,7 @@ const Input = ({ ...rest }: IInputProps) => {
       _focus={{
         borderWidth: 1,
         borderColor: 'green.500',
-        bg: 'gray.700'
+        bg: 'gray.700',
       }}
     />
   );

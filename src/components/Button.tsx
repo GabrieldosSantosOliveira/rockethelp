@@ -1,8 +1,4 @@
-import {
-  Button as ButtonNativeBase,
-  IButtonProps,
-  Heading
-} from 'native-base';
+import { Button as ButtonNativeBase, IButtonProps, Heading } from 'native-base';
 
 type Props = IButtonProps & {
   title: string;
@@ -16,7 +12,7 @@ const Button = ({ title, ...rest }: Props) => {
       fontSize="sm"
       rounded="sm"
       _pressed={{
-        bg: 'green.500'
+        bg: 'green.500',
       }}
     >
       <Heading color="white" fontSize="sm">

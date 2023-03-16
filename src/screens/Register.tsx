@@ -15,10 +15,7 @@ export function Register() {
   const navigation = useNavigation();
   const handleNewOrderRegister = () => {
     if (!patrimony || !description) {
-      return Alert.alert(
-        'Registrar',
-        'Preencha todos os campos'
-      );
+      return Alert.alert('Registrar', 'Preencha todos os campos');
     }
     firestore()
       .collection('orders')
@@ -26,20 +23,17 @@ export function Register() {
         patrimony,
         description,
         status: 'open',
-        created_at: firestore.FieldValue.serverTimestamp()
+        created_at: firestore.FieldValue.serverTimestamp(),
       })
       .then(() => {
-        Alert.alert(
-          'Solicitação',
-          'Solicitação registrada com sucesso'
-        );
+        Alert.alert('Solicitação', 'Solicitação registrada com sucesso');
         navigation.goBack();
       })
       .catch(() => {
         setIsLoading(false);
         return Alert.alert(
           'Registrar',
-          'Não foi possível registrar a solicitação'
+          'Não foi possível registrar a solicitação',
         );
       });
   };
