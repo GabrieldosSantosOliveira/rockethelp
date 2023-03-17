@@ -1,13 +1,9 @@
+import { AntDesign, Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Box, HStack, ScrollView, Text, VStack } from 'native-base';
 import { useTheme } from 'native-base';
-import {
-  CircleWavyCheck,
-  Hourglass,
-  DesktopTower,
-  ClipboardText,
-} from 'phosphor-react-native';
 import { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
@@ -95,9 +91,9 @@ export function Details() {
       </Box>
       <HStack bg="gray.500" justifyContent="center" p={4}>
         {order.status === 'closed' ? (
-          <CircleWavyCheck color={colors.green[300]} size={22} />
+          <AntDesign name="checkcircle" color={colors.green[300]} size={22} />
         ) : (
-          <Hourglass color={colors.green[300]} size={22} />
+          <AntDesign name="hourglass" color={colors.green[300]} size={22} />
         )}
         <Text
           fontSize="sm"
@@ -117,18 +113,32 @@ export function Details() {
         <CardDetails
           title="equipamento"
           description={`Patrimônio: ${order.patrimony}`}
-          icon={DesktopTower}
+          icon={
+            <MaterialCommunityIcons
+              name="desktop-tower-monitor"
+              size={24}
+              color={colors.primary[700]}
+            />
+          }
         />
         <CardDetails
           title="descrição dos detalhes"
           description={order.description}
-          icon={ClipboardText}
+          icon={
+            <Feather name="clipboard" size={24} color={colors.primary[700]} />
+          }
           footer={`Registrado em: ${order.when}`}
         />
         <CardDetails
           title="solução"
           description={order.solution}
-          icon={CircleWavyCheck}
+          icon={
+            <AntDesign
+              name="checkcircle"
+              size={24}
+              color={colors.primary[700]}
+            />
+          }
           footer={order.closed && `Encerrado em ${order.closed}`}
         >
           {order.status === 'open' && (

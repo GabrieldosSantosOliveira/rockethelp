@@ -1,25 +1,23 @@
-import { VStack, HStack, Text, Box, useTheme } from 'native-base';
-import { IconProps } from 'phosphor-react-native';
+import { VStack, HStack, Text, Box } from 'native-base';
 import { ReactNode } from 'react';
 type Props = {
   title: string;
   description?: string;
   footer?: string;
-  icon: React.ElementType<IconProps>;
+  icon: ReactNode;
   children?: ReactNode;
 };
 export const CardDetails = ({
-  icon: Icon,
+  icon,
   title,
   children,
   description,
   footer = null,
 }: Props) => {
-  const { colors } = useTheme();
   return (
     <VStack bg="gray.600" p={5} mt={5} rounded="sm">
       <HStack alignItems="center" mb={4}>
-        <Icon color={colors.primary[700]} />
+        {icon}
         <Text ml={2} color="gray.300" fontSize="sm" textTransform="uppercase">
           {title}
         </Text>
