@@ -2,7 +2,7 @@
 <img width="200px" src="https://user-images.githubusercontent.com/86084272/225799059-49980ad5-a568-4ffe-8374-e51febd899e8.png"/> </p>
 
  ## <p align="center"> Rocket Help <a href="LICENSE"> <img  src="https://img.shields.io/static/v1?label=License&message=MIT&color=&labelColor=202024" alt="License"></a> </p>
-O  Rocket Help foi uma aplicação desenvolvida durante a nlw
+O  Rocket Help foi uma aplicação desenvolvida durante a nlw que auxilia na abertura da solicitação de reparo no caso de quebra, para isso foi utilizado o firebase
 ## 🔖 Demonstração
 
 
