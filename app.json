@@ -2,6 +2,7 @@
   "expo": {
     "name": "rockethelp",
     "slug": "rockethelp",
+    "orientation": "portrait",
     "version": "1.0.0",
     "assetBundlePatterns": ["**/*"],
     "plugins": ["@react-native-firebase/app"],
