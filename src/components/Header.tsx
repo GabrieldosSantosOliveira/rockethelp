@@ -1,3 +1,4 @@
+import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import {
   Heading,
@@ -6,7 +7,7 @@ import {
   useTheme,
   StyledProps,
 } from 'native-base';
-import { CaretLeft } from 'phosphor-react-native';
+
 type Props = StyledProps & {
   title: string;
 };
@@ -27,7 +28,7 @@ export function Header({ title, ...rest }: Props) {
       {...rest}
     >
       <IconButton
-        icon={<CaretLeft color={colors.gray[200]} size={24} />}
+        icon={<AntDesign name="caretleft" color={colors.gray[200]} size={24} />}
         onPress={handleGoBack}
       />
       <Heading

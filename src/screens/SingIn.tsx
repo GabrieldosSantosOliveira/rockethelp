@@ -1,8 +1,8 @@
+import { Octicons, SimpleLineIcons } from '@expo/vector-icons';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { VStack, Heading, Icon, useTheme } from 'native-base';
 import { Text } from 'native-base';
-import { Key, Envelope } from 'phosphor-react-native';
 import { useState } from 'react';
 import { Alert } from 'react-native';
 
@@ -10,7 +10,7 @@ import Logo from '../assets/logo_primary.svg';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 
-const SingIn = () => {
+export const SingIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,7 +23,6 @@ const SingIn = () => {
     setIsLoading(true);
     auth()
       .signInWithEmailAndPassword(email, password)
-
       .catch((error) => {
         setIsLoading(false);
         if (error.code === 'auth/invalid-email') {
@@ -50,13 +49,20 @@ const SingIn = () => {
       <Input
         placeholder="Email"
         marginBottom={4}
-        InputLeftElement={<Icon as={<Envelope color={colors.gray[300]} />} />}
+        InputLeftElement={
+          <Icon
+            ml={3}
+            as={<SimpleLineIcons name="envelope" color={colors.gray[300]} />}
+          />
+        }
         onChangeText={setEmail}
       />
       <Input
         mb={8}
         placeholder="Senha"
-        InputLeftElement={<Icon as={<Key color={colors.gray[300]} />} />}
+        InputLeftElement={
+          <Icon ml={3} as={<Octicons name="key" color={colors.gray[300]} />} />
+        }
         secureTextEntry
         onChangeText={setPassword}
       />
@@ -76,4 +82,3 @@ const SingIn = () => {
     </VStack>
   );
 };
-export { SingIn };

@@ -1,3 +1,4 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
@@ -11,17 +12,17 @@ import {
   FlatList,
   Center,
 } from 'native-base';
-import { SignOut, ChatTeardropText } from 'phosphor-react-native';
 import { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 
 import Logo from '../assets/logo_secondary.svg';
 import { Button } from '../components/Button';
 import { Filter } from '../components/Filter';
+import { ChatTeardropText } from '../components/Icons/ChatTeardropText';
 import { Loading } from '../components/Loading';
 import { Order, OrderProps } from '../components/Order';
 import { dateFormat } from '../utils/firestoreDateFormat';
-const Home = () => {
+export const Home = () => {
   const { colors } = useTheme();
   const [isLoading, setIsLoading] = useState(true);
   const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>(
@@ -78,7 +79,9 @@ const Home = () => {
       >
         <Logo />
         <IconButton
-          icon={<SignOut size={26} color={colors.gray[300]} />}
+          icon={
+            <MaterialIcons name="logout" size={26} color={colors.gray[300]} />
+          }
           onPress={handleLogout}
         />
       </HStack>
@@ -120,7 +123,11 @@ const Home = () => {
             contentContainerStyle={{ paddingBottom: 10 }}
             ListEmptyComponent={() => (
               <Center>
-                <ChatTeardropText color={colors.gray[300]} size={40} />
+                <ChatTeardropText
+                  color={colors.gray[300]}
+                  height={40}
+                  width={40}
+                />
                 <Text color="gray.300" fontSize="xl" mt={6} textAlign="center">
                   Você ainda não possui solicitações{' '}
                   {statusSelected === 'open' ? 'em andamento' : 'finalizadas'}.
@@ -134,4 +141,3 @@ const Home = () => {
     </VStack>
   );
 };
-export { Home };
